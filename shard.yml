@@ -1,0 +1,15 @@
+name: gopher-cr
+version: 0.1.0
+
+authors:
+  - Andy Nicholson <andrew@anicholson.net>
+
+description: |
+  a Gopher server, written in Crystal
+
+dependencies:
+  minitest:
+    github: ysbaddaden/minitest.cr
+    version: 0.3.6
+
+license: GPL
