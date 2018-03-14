@@ -1,6 +1,4 @@
 module Gopher
-  module RequestHandler; end
-  
   class Request
     enum T
       Index
@@ -12,8 +10,8 @@ module Gopher
     def valid?
       @valid
     end
-    
-    def initialize(@raw : Bytes, @valid : Bool, @t : T, @handler : RequestHandler)
+
+    def initialize(@raw : Bytes, @valid : Bool, @t : Request::T, @handler : RequestHandler)
     end
 
     def handle

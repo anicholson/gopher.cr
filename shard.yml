@@ -7,6 +7,10 @@ authors:
 description: |
   a Gopher server, written in Crystal
 
+targets:
+  example:
+    main: src/example.cr
+
 dependencies:
   minitest:
     github: ysbaddaden/minitest.cr

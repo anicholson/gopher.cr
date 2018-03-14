@@ -2,3 +2,4 @@ TAGS
 .shards/
 .icr*.cr
 lib/
+bin/
