@@ -5,11 +5,13 @@ require "./request_factory"
 module Gopher
   class Server
     DEFAULT_PORT = 70_u16
+    DEFAULT_STRATEGY = DummyStrategy.new
 
     getter port : UInt16
     private getter server : TCPServer
+    private getter strategy : Strategy
 
-    def initialize(@host = "localhost", @port = DEFAULT_PORT)
+    def initialize(@strategy = DEFAULT_STRATEGY, @host = "localhost", @port = DEFAULT_PORT)
       @server = TCPServer.new(@host, @port)
     end
 
@@ -20,7 +22,7 @@ module Gopher
     end
 
     private def handle_request(client)
-      request = ::Gopher::RequestFactory.from(client.gets)
+      request = strategy.to_request(client.gets)
 
       response = request.handle
 
