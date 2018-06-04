@@ -3,3 +3,4 @@ TAGS
 .icr*.cr
 lib/
 bin/
+**/*.*~
