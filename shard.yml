@@ -15,5 +15,8 @@ dependencies:
   minitest:
     github: ysbaddaden/minitest.cr
     version: 0.3.6
+  result:
+    github: anicholson/result.cr
+    version: '~> 0.1'
 
 license: GPL

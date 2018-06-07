@@ -4,3 +4,7 @@ shards:
     github: ysbaddaden/minitest.cr
     version: 0.3.6
 
+  result.cr:
+    path: /home/andy/projects/crystal/result.cr
+    version: 0.1.0
+
