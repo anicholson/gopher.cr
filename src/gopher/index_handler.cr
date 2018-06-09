@@ -5,7 +5,6 @@ module Gopher
     include RequestHandler
 
     def handle(request : Request) : String
-      
     end
   end
 end

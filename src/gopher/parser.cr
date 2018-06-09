@@ -16,20 +16,19 @@ RESOURCE_TYPES = {
   'I' => "Image",
   'T' => "Telnet 3270",
 
-  #non-canonical
+  # non-canonical
   'h' => "HTML file",
   'i' => "informational message",
-  's' => "Sound file"
-
+  's' => "Sound file",
 }
-     
+
 abstract class Parser
   abstract def parse(raw : RawRequest) : Request
 end
 
-  class StandardParser < Parser
-    def parse(raw)
-      req = RequestBody.new(raw)
-      Request.ok(req)
-    end
+class StandardParser < Parser
+  def parse(raw)
+    req = RequestBody.new(raw)
+    Request.ok(req)
+  end
 end

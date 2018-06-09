@@ -8,7 +8,7 @@ module Gopher
       "YAS"
     end
   end
-  
+
   class RequestFactory
     def self.from(input : String?)
       input = input.nil? ? "" : input.as(String)
@@ -18,12 +18,12 @@ module Gopher
     def self.from(input) : Request
       request_type, handler = determine_handler(input)
       handler = handler.as(RequestHandler)
-      
+
       Request.new(raw: input, t: request_type, valid: false, handler: handler)
     end
 
     alias HandlerPair = Tuple(Request::T, RequestHandler)
-    
+
     private def self.determine_handler(input) : HandlerPair
       if input == "\r\n".to_slice
         {Request::T::Index, IndexHandler.new}

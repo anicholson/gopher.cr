@@ -13,7 +13,5 @@ end
 alias RawRequest = String
 alias RawResponse = String
 
-alias Request = Result(RequestBody,String)
-alias Response = Result(ResponseBody,String)
-
-
+alias Request = Result(RequestBody, String)
+alias Response = Result(ResponseBody, String)

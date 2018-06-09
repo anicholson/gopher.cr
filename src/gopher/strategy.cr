@@ -2,7 +2,7 @@ require "./request"
 
 module Gopher
   module Strategy
-    abstract def to_request(input) : ::Gopher::Request            
+    abstract def to_request(input) : ::Gopher::Request
   end
 
   class DummyStrategy
