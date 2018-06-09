@@ -1,10 +1,6 @@
 require "../spec_helper"
 
 module Gopher
-  class DummyStrategy
-    
-  end
-  
   describe Server do
     let(strategy) { Gopher::DummyStrategy.new }
     let(port) { 33333_u16 }
