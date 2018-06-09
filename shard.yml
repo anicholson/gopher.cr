@@ -1,4 +1,4 @@
-name: gopher-cr
+name: gopher
 version: 0.1.0
 
 authors:
@@ -10,13 +10,19 @@ description: |
 targets:
   example:
     main: src/example.cr
+  sentry:
+    main: lib/sentry/src/sentry_cli.cr
 
 dependencies:
-  minitest:
-    github: ysbaddaden/minitest.cr
-    version: 0.3.6
   result:
     github: anicholson/result.cr
     version: '~> 0.1'
+development_dependencies:   
+  minitest:
+    github: ysbaddaden/minitest.cr
+    version: 0.3.6
+  sentry:
+    github: samueleaton/sentry
+    version: '~> 0.2'
 
 license: GPL
