@@ -1,6 +1,10 @@
 require "result/result"
 
-class RequestBody
+struct RequestBody
+  def initialize(@selector : String)
+  end
+
+  getter selector
 end
 
 class ResponseBody
