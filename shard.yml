@@ -16,7 +16,7 @@ targets:
 dependencies:
   result:
     github: anicholson/result.cr
-    version: '~> 0.2'
+    version: '~> 0.3'
 development_dependencies:   
   minitest:
     github: ysbaddaden/minitest.cr
