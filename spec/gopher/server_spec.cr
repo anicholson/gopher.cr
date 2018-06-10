@@ -2,10 +2,9 @@ require "../spec_helper"
 
 module Gopher
   describe Server do
-    let(strategy) { Gopher::DummyStrategy.new }
     let(port) { 33333_u16 }
     
-    let(server) { Gopher::Server.new(port: port, strategy: strategy) }
+    let(server) { Gopher::Server.new(port: port) }
     
     describe "#port" do
       it "listens on the provided port" do

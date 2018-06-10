@@ -1,13 +1,13 @@
 require "result/result"
 
 struct RequestBody
-  def initialize(@selector : String)
+  def initialize(@selectors : Array(String))
   end
 
-  getter selector
+  getter selectors
 end
 
-class ResponseBody
+struct ResponseBody
 end
 
 alias RawRequest = String

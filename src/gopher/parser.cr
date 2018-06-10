@@ -28,7 +28,7 @@ end
 
 class StandardParser < Parser
   def parse(raw)
-    req = RequestBody.new(raw)
+    req = RequestBody.new(raw.split('/'))
     Request.ok(req)
   end
 end
