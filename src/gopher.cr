@@ -1,6 +1,6 @@
-require "./gopher/request"
-require "./gopher/strategy"
-require "./gopher/request_handler"
-require "./gopher/invalid_handler"
-require "./gopher/index_handler"
+require "./gopher/types"
+require "./gopher/resolver"
+require "./gopher/resolvers/directory_resolver"
+require "./gopher/parser"
+
 require "./gopher/server"

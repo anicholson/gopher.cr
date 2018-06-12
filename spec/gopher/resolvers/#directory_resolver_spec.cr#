@@ -1,0 +1,23 @@
+require "../../spec_helper"
+
+describe DirectoryResolver do
+  let(:dr) { DirectoryResolver.new(root_path: "../../resources/example_directory") }
+  let(:req) { RequestBody.new(["/"]) }
+
+  describe "root request" do
+    it "is okay" do
+      result = dr.resolve(req)
+      expect(result.ok?).must_equal(true)
+    end
+
+    it "returns a menu" do
+      result = dr.resolve(req)
+
+      expect(typeof(result.value)).must_equal(Menu)
+    end
+    
+    it "includes textfile entries" do
+      
+    end
+  end
+end

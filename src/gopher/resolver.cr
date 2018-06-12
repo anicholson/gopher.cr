@@ -1,5 +1,5 @@
 require "./types"
 
 abstract class Resolver
-  abstract def resolve(req : Request) : Response
+  abstract def resolve(req : RequestBody) : Response
 end
