@@ -4,7 +4,7 @@ require "dir/glob"
 class DirectoryResolver < Resolver
   MENUFILE = ".gophermap"
 
-  def initialize(@root_path : String)
+  def initialize(@root_path : String, @root_selector : String = "")
   end
 
   def resolve(req) : Response
@@ -18,7 +18,11 @@ class DirectoryResolver < Resolver
     Response.ok(menu)
   end
 
-  private getter root_path
+  private getter root_path, root_selector
+
+  private def qualified_selector(s)
+    File.join(root_selector, s)
+  end
 
   private def menu_file_entries(raw_entries)
     return Menu::EMPTY.entries if raw_entries.none?
@@ -39,7 +43,7 @@ class DirectoryResolver < Resolver
         MenuEntry.new(
           entry_type: MenuEntryType.from_char(entry_type),
           description: description,
-          selector: selector,
+          selector: qualified_selector(selector),
           host: host,
           port: port
         )
