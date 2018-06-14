@@ -43,8 +43,6 @@ describe DirectoryResolver do
       result = dr.resolve(req)
       menu = result.value.as Menu
 
-      puts menu.entries
-      
       submenu = menu.entries.count do |entry|
         entry.entry_type == MenuEntryType::Submenu &&
           entry.selector == "/files/games"
