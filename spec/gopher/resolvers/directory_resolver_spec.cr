@@ -6,7 +6,7 @@ describe DirectoryResolver do
     DirectoryResolver.new(root_path: root_path, root_selector: "/files") 
   end
   
-  let(:req) { RequestBody.new(["/"]) }
+  let(:req) { RequestBody.new("/") }
 
   describe "root request" do
     it "is okay" do
@@ -51,6 +51,18 @@ describe DirectoryResolver do
       end
 
       expect(submenu).must_equal(1)
+    end
+  end
+
+  describe "Requesting a selector" do
+    it "works" do
+      req = RequestBody.new("/files/ipsum.txt")
+
+      result = dr.resolve(req)
+      resource = result.value.as Resource
+      expected_content = File.read(File.dirname(__FILE__) + "/../../resources/example_directory/ipsum.txt")
+
+      expect(resource.content.gets_to_end).must_equal(expected_content)
     end
   end
 end
