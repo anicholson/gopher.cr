@@ -19,10 +19,8 @@ class DirectoryResolver < Resolver
   end
 
   private def resolve_selector(sel)
-    puts "sel = #{sel}"
     relative_sel  = relative_selector(sel)
 
-    puts "relative_sel = #{relative_sel}"
     if is_submenu?(relative_sel)
     end
 
