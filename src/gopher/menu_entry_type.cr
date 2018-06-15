@@ -1,4 +1,3 @@
-
 enum MenuEntryType
   TextFile
   Submenu

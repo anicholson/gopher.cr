@@ -5,7 +5,6 @@ require "./menu"
 require "./resource"
 require "./error"
 
-
 alias ResponseBody = Menu | Resource | Error
 
 alias RawRequest = String

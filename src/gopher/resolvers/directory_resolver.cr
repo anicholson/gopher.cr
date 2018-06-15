@@ -2,10 +2,10 @@ require "dir"
 require "dir/glob"
 
 class DirectoryResolver < Resolver
-  MENUFILE = ".gophermap"
-  IMAGE_EXTENSIONS = [".jpg", ".gif", ".bmp", ".png", ".jpeg", ".tif", ".tiff", ".tga", ".ico"]
-  BINARY_EXTENSIONS = IMAGE_EXTENSIONS + [".zip",".tar", ".gz", ".bz2", ".doc", ".xls", ".ppt", ".exe", ".wav", ".mp3", ".ogg"]
-  TEXT_EXTENSIONS = [".c",".C",".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md",".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
+  MENUFILE          = ".gophermap"
+  IMAGE_EXTENSIONS  = [".jpg", ".gif", ".bmp", ".png", ".jpeg", ".tif", ".tiff", ".tga", ".ico"]
+  BINARY_EXTENSIONS = IMAGE_EXTENSIONS + [".zip", ".tar", ".gz", ".bz2", ".doc", ".xls", ".ppt", ".exe", ".wav", ".mp3", ".ogg"]
+  TEXT_EXTENSIONS   = [".c", ".C", ".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md", ".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
 
   def initialize(@root_path : String, @root_selector : String = "")
   end
@@ -19,32 +19,41 @@ class DirectoryResolver < Resolver
   end
 
   private def resolve_selector(sel)
-    relative_sel  = relative_selector(sel)
+    relative_sel = relative_selector(sel)
 
     if is_submenu?(relative_sel)
+      Dir.cd(root_path) do
+        Dir.cd(relative_sel) do
+          raw = File.read(MENUFILE)
+          return Response.ok(menu_from_file(raw))
+        end
+      end
     end
 
     if is_file?(relative_sel)
       Dir.cd(root_path) do
         io = io_resource(relative_sel)
         encoding = guess_encoding(relative_sel)
-        
+
         Response.ok(Resource.new(io, encoding))
       end
     else
       Response.error("Unable to resolve selector: #{relative_sel}")
     end
   end
-  
+
   private def resolve_root : Response
-    raw_entries = [] of String
+    raw_contents = ""
     Dir.cd(root_path) do
-      raw_entries = File.read(MENUFILE).split('\n')
+      raw_contents = File.read(MENUFILE)
     end
 
-    menu = Menu.new(menu_file_entries(raw_entries))
+    Response.ok(menu_from_file(raw_contents))
+  end
 
-    Response.ok(menu)
+  private def menu_from_file(contents)
+    raw_entries = contents.split('\n')
+    Menu.new(menu_file_entries(raw_entries))
   end
 
   private getter root_path, root_selector
@@ -106,8 +115,10 @@ class DirectoryResolver < Resolver
       return File.exists?(selector)
     end
   end
-  
+
   private def is_submenu?(selector)
-    false
+    Dir.cd(root_path) do
+      return File.directory?(selector)
+    end
   end
 end
