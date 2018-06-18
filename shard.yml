@@ -7,6 +7,8 @@ authors:
 description: |
   a Gopher server, written in Crystal
 
+crystal: 0.25.0
+
 targets:
   example:
     main: src/example.cr
@@ -20,9 +22,11 @@ dependencies:
 development_dependencies:   
   minitest:
     github: ysbaddaden/minitest.cr
-    version: 0.3.6
-  sentry:
-    github: samueleaton/sentry
-    version: '~> 0.2'
+    version: "~> 0.4"
+
+# uncomment this when sentry becomes 0.25-compatible
+#  sentry:
+#    github: samueleaton/sentry
+#    version: '~> 0.2'
 
 license: GPL

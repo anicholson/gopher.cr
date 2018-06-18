@@ -76,7 +76,7 @@ class DirectoryResolver < Resolver
       ResourceEncoding::Binary
     elsif TEXT_EXTENSIONS.includes? extension
       ResourceEncoding::Text
-    elsif File::Stat.new(file_path).perm & 0o1 == 0o1 # execute bit set?
+    elsif File.info(file_path).permissions.owner_execute?
       ResourceEncoding::Binary
     else
       ResourceEncoding::Binary
