@@ -10,6 +10,7 @@ module Gopher
 
     def add_resolver(path : String, resolver : Resolver)
       @routes << Route.new(path: /^(#{path}).*/, resolver: resolver)
+      self
     end
 
     def handle_request(req : RequestBody)

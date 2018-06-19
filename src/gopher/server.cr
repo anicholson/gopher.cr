@@ -1,6 +1,5 @@
 require "socket"
 require "socket/tcp_server"
-require "./request_factory"
 
 module Gopher
   class Server

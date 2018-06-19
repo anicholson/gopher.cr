@@ -5,10 +5,12 @@ require "./menu"
 require "./resource"
 require "./error"
 
-alias ResponseBody = Menu | Resource | Error
+module Gopher
+  alias ResponseBody = Menu | Resource | Error
 
-alias RawRequest = String
-alias RawResponse = String
+  alias RawRequest = String
+  alias RawResponse = String
 
-alias Request = Result(RequestBody, String)
-alias Response = Result(ResponseBody, String)
+  alias Request = Result(RequestBody, String)
+  alias Response = Result(ResponseBody, String)
+end
