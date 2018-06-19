@@ -5,6 +5,8 @@ require "./gopher/resolvers/multi_resolver"
 require "./gopher/resolvers/directory_resolver"
 require "./gopher/resolvers/selector_resolver"
 require "./gopher/resolvers/null_resolver"
+require "./gopher/default_error_renderer"
+require "./gopher/renderer"
 require "./gopher/parser"
 
 require "./gopher/server"

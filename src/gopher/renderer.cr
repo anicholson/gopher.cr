@@ -1,5 +1,13 @@
-require "./types"
+module Gopher
+  class Renderer
+    def render(client : IO, item : Response)
+      if item.error?
+        render_error(client, item.error)
+      end
+    end
 
-abstract class Renderer
-  abstract def render(resp : Response) : RawResponse
+    private def render_error(client, message)
+      DefaultErrorRenderer.new(message).to_s(client)
+    end
+  end
 end
