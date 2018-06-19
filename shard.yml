@@ -12,8 +12,8 @@ crystal: 0.25.0
 targets:
   example:
     main: src/example.cr
-  sentry:
-    main: lib/sentry/src/sentry_cli.cr
+#  sentry:
+#    main: lib/sentry/src/sentry_cli.cr
 
 dependencies:
   result:

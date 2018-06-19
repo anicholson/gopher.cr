@@ -50,7 +50,7 @@ module Gopher
       end
     end
 
-    describe "handle_request" do
+    describe "#resolve" do
       let(:never_resolves) {
         StubResolver.new do |sel|
           false
@@ -72,7 +72,7 @@ module Gopher
       end
 
       it "calls resolvers until one resolves with a Result_Ok" do
-        result = resolver.handle_request(RequestBody.new "/second")
+        result = resolver.resolve(RequestBody.new "/second")
 
         expect(never_resolves.called?).must_equal(true)
         expect(always_resolves.called?).must_equal(true)
@@ -80,7 +80,7 @@ module Gopher
       end
 
       it "returns a sensible error if nothing matches" do
-        result = resolver.handle_request(RequestBody.new "/funk")
+        result = resolver.resolve(RequestBody.new "/funk")
 
         expect(never_resolves.called?).must_equal(false)
         expect(always_resolves.called?).must_equal(false)

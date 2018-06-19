@@ -7,24 +7,40 @@ module Gopher
 
     getter port : UInt16
     private getter server : TCPServer
-    private property resolver : Resolver
+    property resolver : ::Gopher::Resolver
 
     def initialize(@resolver = NullResolver.new, @host = "localhost", @port = DEFAULT_PORT)
       @server = TCPServer.new(host: @host, port: @port, reuse_port: true)
     end
 
     def listen!
+      puts "listening on port #{port}"
       while client = server.accept?
         spawn handle_request(client)
       end
     end
 
     private def handle_request(client)
-      # request = strategy.to_request(client.gets)
+      puts "Handling request: "
+      raw = client.gets || "/"
 
-      # response = request.handle
+      puts raw
+      request = RequestBody.new(raw.strip)
+      result = resolver.resolve(request)
 
-      # client.puts response
+      if result.error?
+        client.puts "3Somethingbroke\tsad\tnullhost\t70\r\n"
+        end_response(client)
+      else
+        client.puts "0Hooray\tyay\nullhost.com\t70\r\n"
+        end_response(client)
+      end
+
+      client.close
+    end
+
+    private def end_response(client)
+      client.write ".".encode("utf-8")
     end
   end
 end

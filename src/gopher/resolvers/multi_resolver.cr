@@ -1,5 +1,5 @@
 module Gopher
-  class MultiResolver
+  class MultiResolver < Resolver
     getter routes
 
     @routes : Array(Route)
@@ -13,7 +13,7 @@ module Gopher
       self
     end
 
-    def handle_request(req : RequestBody)
+    def resolve(req : RequestBody)
       last_result = nil
       routes.each do |route|
         if req.selector.match route.path
