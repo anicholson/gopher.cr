@@ -1,5 +1,5 @@
 module Gopher
-  class Router
+  class MultiResolver
     getter routes
 
     @routes : Array(Route)

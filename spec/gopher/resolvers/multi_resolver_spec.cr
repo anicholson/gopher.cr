@@ -1,4 +1,4 @@
-require "../spec_helper"
+require "../../spec_helper"
 
 module Gopher
   class StubResolver < Resolver
@@ -32,21 +32,21 @@ module Gopher
     private getter custom
   end
 
-  describe Router do
-    let(:router) { Router.new }
+  describe MultiResolver do
+    let(:resolver) { MultiResolver.new }
 
     describe "#add_resolver" do
       it "stores the resolver" do
-        expect(router.routes.size).must_equal(0)
-        router.add_resolver("/home", NullResolver.new)
-        expect(router.routes.size).must_equal(1)
+        expect(resolver.routes.size).must_equal(0)
+        resolver.add_resolver("/home", NullResolver.new)
+        expect(resolver.routes.size).must_equal(1)
       end
 
       it "allows multiple resolvers at a given point" do
-        expect(router.routes.size).must_equal(0)
-        router.add_resolver("/home", NullResolver.new)
-        router.add_resolver("/home", NullResolver.new)
-        expect(router.routes.size).must_equal(2)
+        expect(resolver.routes.size).must_equal(0)
+        resolver.add_resolver("/home", NullResolver.new)
+        resolver.add_resolver("/home", NullResolver.new)
+        expect(resolver.routes.size).must_equal(2)
       end
     end
 
@@ -66,13 +66,13 @@ module Gopher
       let(:third) { StubResolver.new { |r| false } }
 
       before do
-        router.add_resolver("/second", never_resolves)
-        router.add_resolver("/second", always_resolves)
-        router.add_resolver("/third", third)
+        resolver.add_resolver("/second", never_resolves)
+        resolver.add_resolver("/second", always_resolves)
+        resolver.add_resolver("/third", third)
       end
 
       it "calls resolvers until one resolves with a Result_Ok" do
-        result = router.handle_request(RequestBody.new "/second")
+        result = resolver.handle_request(RequestBody.new "/second")
 
         expect(never_resolves.called?).must_equal(true)
         expect(always_resolves.called?).must_equal(true)
@@ -80,7 +80,7 @@ module Gopher
       end
 
       it "returns a sensible error if nothing matches" do
-        result = router.handle_request(RequestBody.new "/funk")
+        result = resolver.handle_request(RequestBody.new "/funk")
 
         expect(never_resolves.called?).must_equal(false)
         expect(always_resolves.called?).must_equal(false)

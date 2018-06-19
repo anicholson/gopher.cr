@@ -1,7 +1,7 @@
 require "./gopher/types"
 require "./gopher/route"
-require "./gopher/router"
 require "./gopher/resolver"
+require "./gopher/resolvers/multi_resolver"
 require "./gopher/resolvers/directory_resolver"
 require "./gopher/resolvers/selector_resolver"
 require "./gopher/resolvers/null_resolver"
