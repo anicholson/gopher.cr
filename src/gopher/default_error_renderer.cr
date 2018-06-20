@@ -7,7 +7,6 @@ module Gopher
     end
 
     def to_s(io)
-      puts "to_s called"
       ECR.embed("src/gopher/default_error_message.ecr", io)
     end
   end
