@@ -31,12 +31,7 @@ module Gopher
       result = resolver.resolve(request)
 
       renderer.render(client, result)
-      end_response(client)
       client.close
-    end
-
-    private def end_response(client)
-      client.write ".".encode("utf-8")
     end
   end
 end

@@ -98,7 +98,7 @@ module Gopher
           fields = entry.split('\t')
           entry_type_and_description = fields[0] rescue ""
           entry_type = entry_type_and_description.chars.first
-          description = entry_type_and_description.lchop
+          description = entry_type_and_description.lchop '/'
 
           selector = fields[1] rescue ""
           host = fields[2] rescue ""
