@@ -5,12 +5,14 @@ module Gopher
   class Server
     DEFAULT_PORT = 70_u16
 
-    getter port : UInt16
+    getter port : UInt16, host : String
     private getter server : TCPServer
+    private getter renderer : Renderer
     property resolver : ::Gopher::Resolver
 
     def initialize(@resolver = NullResolver.new, @host = "localhost", @port = DEFAULT_PORT)
       @server = TCPServer.new(host: @host, port: @port, reuse_port: true)
+      @renderer = Renderer.new
     end
 
     def listen!
@@ -28,14 +30,8 @@ module Gopher
       request = RequestBody.new(raw.strip)
       result = resolver.resolve(request)
 
-      if result.error?
-        client.puts "3Something broke\tsad\tnullhost\t70\r\n"
-        end_response(client)
-      else
-        client.puts "0Hooray\tyay\nullhost.com\t70\r\n"
-        end_response(client)
-      end
-
+      renderer.render(client, result)
+      end_response(client)
       client.close
     end
 

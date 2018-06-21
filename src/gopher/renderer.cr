@@ -16,7 +16,6 @@ module Gopher
 
     private def render_menu(client, item)
       item.entries.each &.to_s(client)
-      client << "."
     end
   end
 end

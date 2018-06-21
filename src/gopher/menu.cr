@@ -1,10 +1,12 @@
 require "./menu_entry"
 
-class Menu
-  EMPTY = self.new
+module Gopher
+  class Menu
+    EMPTY = self.new
 
-  getter entries : Array(MenuEntry)
+    getter entries : Array(MenuEntry)
 
-  def initialize(@entries = [] of MenuEntry)
+    def initialize(@entries = [] of MenuEntry)
+    end
   end
 end
