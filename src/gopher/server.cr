@@ -29,7 +29,7 @@ module Gopher
       result = resolver.resolve(request)
 
       if result.error?
-        client.puts "3Somethingbroke\tsad\tnullhost\t70\r\n"
+        client.puts "3Something broke\tsad\tnullhost\t70\r\n"
         end_response(client)
       else
         client.puts "0Hooray\tyay\nullhost.com\t70\r\n"

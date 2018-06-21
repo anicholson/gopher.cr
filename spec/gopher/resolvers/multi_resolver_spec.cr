@@ -16,6 +16,10 @@ module Gopher
       @resolved
     end
 
+    def menu_entry_type
+      MenuEntryType::Submenu
+    end
+
     def resolve(req : RequestBody)
       @called = true
       result = custom.call(req.selector)
@@ -33,7 +37,7 @@ module Gopher
   end
 
   describe MultiResolver do
-    let(:resolver) { MultiResolver.new }
+    let(:resolver) { MultiResolver.new("localhost", "70") }
 
     describe "#add_resolver" do
       it "stores the resolver" do
@@ -66,9 +70,23 @@ module Gopher
       let(:third) { StubResolver.new { |r| false } }
 
       before do
-        resolver.add_resolver("/second", never_resolves)
-        resolver.add_resolver("/second", always_resolves)
+        resolver.add_resolver("/second", never_resolves, "S1")
+        resolver.add_resolver("/second", always_resolves, "S2")
         resolver.add_resolver("/third", third)
+      end
+
+      describe "resolving /" do
+        it "works" do
+          result = resolver.resolve(RequestBody.new "/")
+
+          expect(result.ok?).must_equal(true)
+        end
+
+        it "lists the subresolvers it knows about" do
+          result = resolver.resolve(RequestBody.new "/").value
+
+          expect(result.class).must_equal(Menu)
+        end
       end
 
       it "calls resolvers until one resolves with a Result_Ok" do

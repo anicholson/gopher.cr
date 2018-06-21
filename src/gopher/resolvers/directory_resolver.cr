@@ -11,6 +11,10 @@ module Gopher
     def initialize(@root_path : String, @root_selector : String = "")
     end
 
+    def menu_entry_type
+      MenuEntryType::Submenu
+    end
+
     def resolve(request : RequestBody) : Response
       if request.root?
         resolve_root

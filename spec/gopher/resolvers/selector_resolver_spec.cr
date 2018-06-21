@@ -4,7 +4,7 @@ module Gopher
   describe SelectorResolver do
     let(:sel) { "/about" }
     let(:resource) { Resource.new(IO::Memory.new("Hello, Gopherspace"), ResourceEncoding::Text) }
-    let(:resolver) { SelectorResolver.new(selector: sel, response: resource) }
+    let(:resolver) { SelectorResolver.new(selector: sel, response: resource, menu_entry_type: MenuEntryType::Info) }
     it "returns the resource when the selector matches" do
       result = resolver.resolve(RequestBody.new(sel))
 
