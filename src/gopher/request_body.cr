@@ -7,5 +7,9 @@ struct RequestBody
     selector.blank? || selector == "/"
   end
 
+  def relative_selector
+    selector.lchop('/')
+  end
+
   getter selector
 end

@@ -8,6 +8,10 @@ module Gopher
       if item.value.is_a?(Menu)
         return render_menu(client, item.value.as(Menu))
       end
+
+      if item.value.is_a?(Resource)
+        client << item.value.as(Resource).content
+      end
     end
 
     private def render_error(client, message)

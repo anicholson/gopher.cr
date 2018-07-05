@@ -6,7 +6,8 @@ module Gopher
     getter menu_entry_type : MenuEntryType
 
     def resolve(req)
-      if req.selector == selector
+      sel = req.selector.blank? ? "/" : req.selector
+      if sel == selector
         Response.ok(response)
       else
         Response.error("Didn't resolve #{req.selector} against #{selector}")

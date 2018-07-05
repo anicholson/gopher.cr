@@ -12,6 +12,12 @@ module Gopher
       initialize(content: IO::Memory.new(string), encoding: ResourceEncoding::Text)
     end
 
-    getter content, encoding
+    getter encoding
+
+    def content
+      debug "About to send content"
+      @content.rewind
+      @content
+    end
   end
 end

@@ -30,21 +30,17 @@ module Gopher
       end
 
       last_result = nil
-      routes.each do |route|
-        if route.match req.selector
-          result = route.resolver.resolve(req)
 
-          return result if result.ok?
+      debug "Selector is", req.relative_selector
+      route = routes.find {|route| route.match req.relative_selector }
 
-          last_result = result
-        end
+      if route.nil?
+        return Response.error("Nothing was found that matched #{req.selector}")
       end
 
-      if last_result.nil?
-        Response.error("Nothing was found that matched #{req.selector}")
-      else
-        last_result.as(Response)
-      end
+      new_request_body = RequestBody.new(req.relative_selector.lchop(route.path))
+      
+      result = route.resolver.resolve(new_request_body)
     end
   end
 end
