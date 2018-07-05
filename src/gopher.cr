@@ -1,4 +1,4 @@
-require "./debug"
+require "./trace"
 require "./gopher/types"
 require "./gopher/route"
 require "./gopher/resolver"

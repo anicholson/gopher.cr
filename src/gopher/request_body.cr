@@ -1,10 +1,11 @@
 struct RequestBody
+  ROOT = "/"
   def initialize(selector : String)
-    @selector = !selector ? "" : selector
+    @selector = !selector ? ROOT : selector
   end
 
   def root?
-    selector.blank? || selector == "/"
+    selector == ROOT
   end
 
   def relative_selector

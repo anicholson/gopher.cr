@@ -31,7 +31,8 @@ module Gopher
 
       last_result = nil
 
-      debug "Selector is", req.relative_selector
+      trace "Selector is", req.relative_selector
+      
       route = routes.find {|route| route.match req.relative_selector }
 
       if route.nil?

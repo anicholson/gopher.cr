@@ -15,7 +15,7 @@ module Gopher
     getter encoding
 
     def content
-      debug "About to send content"
+      trace "About to send content"
       @content.rewind
       @content
     end

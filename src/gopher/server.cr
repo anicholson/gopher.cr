@@ -23,10 +23,9 @@ module Gopher
     end
 
     private def handle_request(client)
-      debug "Handling request: "
       raw = client.gets || "/"
 
-      debug raw
+      trace "Handling request: ", raw
 
       request = RequestBody.new(raw.strip)
       result = resolver.resolve(request)
