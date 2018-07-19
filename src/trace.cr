@@ -4,4 +4,3 @@ def trace(*items)
   {% end %}
   nil
 end
-

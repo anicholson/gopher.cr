@@ -1,7 +1,7 @@
 module Gopher
   class MultiResolver < Resolver
     getter routes
-    private getter host, port
+    private getter host, port, relative_root
 
     @routes : Array(Route)
 
@@ -19,28 +19,33 @@ module Gopher
     end
 
     def resolve(req : RequestBody)
+      trace "MultiResolver resolving from #{relative_root}"
+
       if req.root?
+        trace "Handling root request"
+
         entries = routes.map do |route|
           resolver = route.resolver
 
           MenuEntry.new(entry_type: resolver.menu_entry_type, description: route.description, selector: route.path, host: host, port: port)
         end
 
+        trace "returning a menu"
         return Response.ok(Menu.new(entries))
       end
 
       last_result = nil
 
       trace "Selector is", req.relative_selector
-      
-      route = routes.find {|route| route.match req.relative_selector }
+
+      route = routes.find { |route| route.match req.relative_selector }
 
       if route.nil?
         return Response.error("Nothing was found that matched #{req.selector}")
       end
 
       new_request_body = RequestBody.new(req.relative_selector.lchop(route.path))
-      
+
       result = route.resolver.resolve(new_request_body)
     end
   end

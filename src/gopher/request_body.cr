@@ -1,5 +1,6 @@
 struct RequestBody
   ROOT = "/"
+
   def initialize(selector : String)
     @selector = !selector ? ROOT : selector
   end

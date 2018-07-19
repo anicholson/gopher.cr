@@ -23,7 +23,11 @@ module Gopher
     end
 
     private def handle_request(client)
-      raw = client.gets || "/"
+      raw = client.gets.to_s.strip
+
+      if raw.blank? || raw == "$"
+        raw = "/"
+      end
 
       trace "Handling request: ", raw
 
@@ -31,6 +35,7 @@ module Gopher
       result = resolver.resolve(request)
 
       renderer.render(client, result)
+      client.flush
       client.close
     end
   end
