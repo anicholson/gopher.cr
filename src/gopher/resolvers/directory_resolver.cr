@@ -18,12 +18,12 @@ module Gopher
     end
 
     def resolve(request : RequestBody) : Response
-      trace request.selector
+      debug request.selector
 
       relative_request = RequestBody.new(request.selector.lchop(root_selector))
 
       if relative_request.root?
-        trace "Resolving root request: "
+        debug "Resolving root request: "
         resolve_root
       else
         resolve_selector relative_request.selector.as(String).lchop('/')
@@ -33,7 +33,7 @@ module Gopher
     private def resolve_selector(sel)
       relative_sel = relative_selector(sel)
 
-      trace "Resolving: #{relative_sel}"
+      debug "Resolving: #{relative_sel}"
 
       if is_submenu?(relative_sel)
         Dir.cd(root_path) do
@@ -52,7 +52,7 @@ module Gopher
           Response.ok(Resource.new(io, encoding))
         end
       else
-        trace "Unable to resolve selector: #{relative_sel}"
+        debug "Unable to resolve selector: #{relative_sel}"
         Response.error("Unable to resolve selector: #{relative_sel}")
       end
     end
@@ -119,7 +119,7 @@ module Gopher
           host = fields[2] rescue Resolver::DEFAULT_HOST
           port = fields[3].to_u16 rescue Resolver::DEFAULT_PORT
 
-          trace "found entry: #{selector}, #{host}, #{port}"
+          debug "found entry: #{selector}, #{host}, #{port}"
 
           MenuEntry.new(
             entry_type: MenuEntryType.from_char(entry_type),
@@ -133,8 +133,8 @@ module Gopher
     end
 
     private def is_file?(selector)
-      trace "Checking if #{selector} is a file in #{root_path}"
-      trace "File.expand_path: #{File.expand_path(selector, root_path)}"
+      debug "Checking if #{selector} is a file in #{root_path}"
+      debug "File.expand_path: #{File.expand_path(selector, root_path)}"
       #      Dir.cd(root_path) do
       return File.exists?(File.expand_path(selector, root_path))
       #      end

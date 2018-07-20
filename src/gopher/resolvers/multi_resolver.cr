@@ -16,7 +16,7 @@ module Gopher
 
       if resolver.is_a?(DirectoryResolver)
         absolute_root_path = [relative_root, path].join "/"
-        trace "adding a DirectoryResolver, so setting relative_root to #{absolute_root_path}"
+        debug "adding a DirectoryResolver, so setting relative_root to #{absolute_root_path}"
         resolver.root_selector = absolute_root_path
       end
 
@@ -29,10 +29,10 @@ module Gopher
     end
 
     def resolve(req : RequestBody)
-      trace "MultiResolver resolving from #{relative_root}"
+      debug "MultiResolver resolving from #{relative_root}"
 
       if req.root?
-        trace "Handling root request"
+        debug "Handling root request"
 
         entries = routes.map do |route|
           resolver = route.resolver
@@ -40,13 +40,13 @@ module Gopher
           MenuEntry.new(entry_type: resolver.menu_entry_type, description: route.description, selector: route.path, host: host, port: port)
         end
 
-        trace "returning a menu"
+        debug "returning a menu"
         return Response.ok(Menu.new(entries))
       end
 
       last_result = nil
 
-      trace "Selector is", req.relative_selector
+      debug "Selector is", req.relative_selector
 
       route = routes.find { |route| route.match req.relative_selector }
 

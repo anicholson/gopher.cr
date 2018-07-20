@@ -29,7 +29,7 @@ module Gopher
         raw = "/"
       end
 
-      trace "Handling request: ", raw
+      debug "Handling request: ", raw
 
       request = RequestBody.new(raw.strip)
       result = resolver.resolve(request)

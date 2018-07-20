@@ -1,7 +1,7 @@
 module Gopher
   class Renderer
     def render(client : IO, item : Response)
-      trace "Rendering an item of type: #{item.class}"
+      debug "Rendering an item of type: #{item.class}"
 
       if item.error?
         return render_error(client, item.error)
@@ -21,8 +21,8 @@ module Gopher
     end
 
     private def render_menu(client, item)
-      trace "Rendering menu back to user: #{item.entries.size} entries"
-      item.entries.each { |i| trace i }
+      debug "Rendering menu back to user: #{item.entries.size} entries"
+      item.entries.each { |i| debug i }
       item.entries.each &.to_s(client)
       client << '.'
     end
