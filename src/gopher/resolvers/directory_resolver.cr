@@ -4,11 +4,13 @@ require "dir/glob"
 module Gopher
   class DirectoryResolver < Resolver
     MENUFILE          = ".gophermap"
+    HOST_MARKER       = "%HOST%"
+    PORT_MARKER       = "%PORT%"
     IMAGE_EXTENSIONS  = [".jpg", ".gif", ".bmp", ".png", ".jpeg", ".tif", ".tiff", ".tga", ".ico"]
     BINARY_EXTENSIONS = IMAGE_EXTENSIONS + [".zip", ".tar", ".gz", ".bz2", ".doc", ".xls", ".ppt", ".exe", ".wav", ".mp3", ".ogg"]
     TEXT_EXTENSIONS   = [".c", ".C", ".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md", ".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
 
-    def initialize(@root_path : String, @root_selector : String = "")
+    def initialize(@root_path : String, @root_selector : String = "", @default_host : String = "localhost", @default_port : UInt16 = 70_u16)
     end
 
     def menu_entry_type
@@ -16,15 +18,22 @@ module Gopher
     end
 
     def resolve(request : RequestBody) : Response
-      if request.root?
+      trace request.selector
+
+      relative_request = RequestBody.new(request.selector.lchop(root_selector))
+
+      if relative_request.root?
+        trace "Resolving root request: "
         resolve_root
       else
-        resolve_selector request.selector.as(String)
+        resolve_selector relative_request.selector.as(String).lchop('/')
       end
     end
 
     private def resolve_selector(sel)
       relative_sel = relative_selector(sel)
+
+      trace "Resolving: #{relative_sel}"
 
       if is_submenu?(relative_sel)
         Dir.cd(root_path) do
@@ -43,6 +52,7 @@ module Gopher
           Response.ok(Resource.new(io, encoding))
         end
       else
+        trace "Unable to resolve selector: #{relative_sel}"
         Response.error("Unable to resolve selector: #{relative_sel}")
       end
     end
@@ -57,11 +67,15 @@ module Gopher
     end
 
     private def menu_from_file(contents)
-      raw_entries = contents.split('\n')
+      raw_entries = contents.split('\n').map do |entry|
+        entry.gsub(HOST_MARKER, default_host)
+          .gsub(PORT_MARKER, default_port)
+      end
       Menu.new(menu_file_entries(raw_entries))
     end
 
-    private getter root_path, root_selector
+    private getter root_path
+    property default_host, default_port, root_selector
 
     private def qualified_selector(s)
       File.join(root_selector, s)
@@ -98,12 +112,14 @@ module Gopher
           fields = entry.split('\t')
           entry_type_and_description = fields[0] rescue ""
           entry_type = entry_type_and_description.chars.first
-          entry_type_and_description.lchop
+          entry_type_and_description = entry_type_and_description.lchop
           description = entry_type_and_description.lchop '/'
 
           selector = fields[1] rescue ""
-          host = fields[2] rescue ""
-          port = fields[3] rescue ""
+          host = fields[2] rescue Resolver::DEFAULT_HOST
+          port = fields[3].to_u16 rescue Resolver::DEFAULT_PORT
+
+          trace "found entry: #{selector}, #{host}, #{port}"
 
           MenuEntry.new(
             entry_type: MenuEntryType.from_char(entry_type),
@@ -117,9 +133,11 @@ module Gopher
     end
 
     private def is_file?(selector)
-      Dir.cd(root_path) do
-        return File.exists?(selector)
-      end
+      trace "Checking if #{selector} is a file in #{root_path}"
+      trace "File.expand_path: #{File.expand_path(selector, root_path)}"
+      #      Dir.cd(root_path) do
+      return File.exists?(File.expand_path(selector, root_path))
+      #      end
     end
 
     private def is_submenu?(selector)

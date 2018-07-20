@@ -23,9 +23,9 @@ module Gopher
       describe "rendering a menu" do
         let(:item) do
           Response.ok(Menu.new([
-            MenuEntry.new(entry_type: MenuEntryType::Info, selector: "NULL", description: "Hello, menu", host: "nullhost", port: "null"),
-            MenuEntry.new(entry_type: MenuEntryType::TextFile, selector: "/about.txt", description: "Le text", host: "nullhost", port: "null"),
-            MenuEntry.new(entry_type: MenuEntryType::Submenu, selector: "/1/Stuff", description: "More stuff", host: "nullhost", port: "70"),
+            MenuEntry.new(entry_type: MenuEntryType::Info, selector: "NULL", description: "Hello, menu", host: "nullhost", port: 70_u16),
+            MenuEntry.new(entry_type: MenuEntryType::TextFile, selector: "/about.txt", description: "Le text", host: "nullhost", port: 70_u16),
+            MenuEntry.new(entry_type: MenuEntryType::Submenu, selector: "/1/Stuff", description: "More stuff", host: "nullhost", port: 70_u16),
           ]))
         end
 

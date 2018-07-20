@@ -5,11 +5,21 @@ module Gopher
 
     @routes : Array(Route)
 
-    def initialize(@host : String, @port : String, @relative_root : String = "")
+    def initialize(@host : String, @port : UInt16, @relative_root : String = "")
+      super(default_host: @host, default_port: @port)
       @routes = [] of Route
     end
 
     def add_resolver(path : String, resolver : Resolver, description : String = path)
+      resolver.default_host = host
+      resolver.default_port = port
+
+      if resolver.is_a?(DirectoryResolver)
+        absolute_root_path = [relative_root, path].join "/"
+        trace "adding a DirectoryResolver, so setting relative_root to #{absolute_root_path}"
+        resolver.root_selector = absolute_root_path
+      end
+
       @routes << Route.new(path: path, resolver: resolver, description: description)
       self
     end

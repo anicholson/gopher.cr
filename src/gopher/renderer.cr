@@ -12,7 +12,7 @@ module Gopher
       end
 
       if item.value.is_a?(Resource)
-        client << item.value.as(Resource).content
+        client << item.value.as(Resource).content.gets
       end
     end
 

@@ -3,6 +3,7 @@ require "../../spec_helper"
 module Gopher
   class StubResolver < Resolver
     def initialize(&custom : String -> Bool)
+      super
       @called = false
       @resolved = false
       @custom = custom
@@ -37,7 +38,7 @@ module Gopher
   end
 
   describe MultiResolver do
-    let(:resolver) { MultiResolver.new("localhost", "70") }
+    let(:resolver) { MultiResolver.new("localhost", 70_u16) }
 
     describe "#add_resolver" do
       it "stores the resolver" do

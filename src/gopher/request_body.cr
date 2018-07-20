@@ -6,7 +6,7 @@ struct RequestBody
   end
 
   def root?
-    selector == ROOT
+    selector == ROOT || selector.blank?
   end
 
   def relative_selector

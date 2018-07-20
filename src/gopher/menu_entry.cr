@@ -1,7 +1,7 @@
 require "./menu_entry_type"
 
 module Gopher
-  record MenuEntry, entry_type : MenuEntryType, description : String, selector : String, host : String, port : String do
+  record MenuEntry, entry_type : MenuEntryType, description : String, selector : String, host : String, port : UInt16 do
     DELIMITER = '\t'
     EOL       = "\r\n"
 

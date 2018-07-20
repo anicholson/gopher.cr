@@ -16,7 +16,7 @@ server = G::Server.new port: server_port
 about = G::SelectorResolver.new("/", G::Resource.new("Hello from gopherland"), G::MenuEntryType::TextFile)
 example_directory = G::DirectoryResolver.new(File.dirname(__FILE__) + "/../spec/resources/example_directory")
 
-resolver = Gopher::MultiResolver.new(host: server.host, port: server.port.to_s)
+resolver = Gopher::MultiResolver.new(host: server.host, port: server.port)
 resolver.add_resolver("hello", about)
 resolver.add_resolver("stuff", example_directory)
 

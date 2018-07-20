@@ -1,6 +1,7 @@
 module Gopher
   class SelectorResolver < Resolver
     def initialize(@selector : String, @response : ResponseBody, @menu_entry_type : MenuEntryType)
+      super()
     end
 
     getter menu_entry_type : MenuEntryType
