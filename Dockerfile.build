@@ -1,0 +1,21 @@
+FROM alpine:latest
+
+RUN mkdir -p /opt/gopher
+
+RUN apk update
+RUN apk add crystal shards
+RUN apk add libc-dev libpthread-stubs
+RUN apk add shadow
+
+ARG UID
+ARG GID
+ARG UNAME
+
+RUN groupadd -g $GID $UNAME
+RUN useradd -m -u $UID -g $GID -s /bin/sh $UNAME
+
+USER $UNAME
+
+VOLUME /opt/gopher
+
+WORKDIR /opt/gopher

@@ -5,3 +5,4 @@ lib/
 bin/
 **/*.*~
 **/*.cr#
+.docker-built
