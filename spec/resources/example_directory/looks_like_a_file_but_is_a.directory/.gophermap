@@ -2,4 +2,8 @@ iHello. This should get  picked up as a submenu item.
 i
 i
 iHere is an image:
-IMindBlown	blown.jpg	%HOST%	%PORT%
+IMindBlown	/blown.jpg	%HOST%	%PORT%
+i
+i
+iand here is some text:
+0LOL	lol.txt	%HOST%	%PORT%
