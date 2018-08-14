@@ -39,7 +39,7 @@ module Gopher
         Dir.cd(root_path) do
           Dir.cd(relative_sel) do
             raw = File.read(MENUFILE)
-            return Response.ok(menu_from_file(raw))
+            return Response.ok(menu_from_file(relative_sel, raw))
           end
         end
       end
@@ -63,22 +63,22 @@ module Gopher
         raw_contents = File.read(MENUFILE)
       end
 
-      Response.ok(menu_from_file(raw_contents))
+      Response.ok(menu_from_file("/", raw_contents))
     end
 
-    private def menu_from_file(contents)
+    private def menu_from_file(relative_root, contents)
       raw_entries = contents.split('\n').map do |entry|
         entry.gsub(HOST_MARKER, default_host)
           .gsub(PORT_MARKER, default_port)
       end
-      Menu.new(menu_file_entries(raw_entries))
+      Menu.new(menu_file_entries(relative_root, raw_entries))
     end
 
     private getter root_path
     property default_host, default_port, root_selector
 
-    private def qualified_selector(s)
-      File.join(root_selector, s)
+    private def qualified_selector(relative_root, s)
+      File.join(root_selector, relative_root, s)
     end
 
     private def relative_selector(fq_selector)
@@ -102,7 +102,7 @@ module Gopher
       end
     end
 
-    private def menu_file_entries(raw_entries)
+    private def menu_file_entries(relative_root, raw_entries)
       return Menu::EMPTY.entries if raw_entries.none?
 
       raw_entries.map do |entry|
@@ -124,7 +124,7 @@ module Gopher
           MenuEntry.new(
             entry_type: MenuEntryType.from_char(entry_type),
             description: description,
-            selector: qualified_selector(selector),
+            selector: qualified_selector(relative_root, selector),
             host: host,
             port: port
           )
@@ -134,7 +134,7 @@ module Gopher
 
     private def is_file?(selector)
       debug "Checking if #{selector} is a file in #{root_path}"
-      debug "File.expand_path: #{File.expand_path(selector, root_path)}"
+      debug "File.expand_path: #{File.expand_path(File.join(root_selector, selector), root_path)}"
       #      Dir.cd(root_path) do
       return File.exists?(File.expand_path(selector, root_path))
       #      end
