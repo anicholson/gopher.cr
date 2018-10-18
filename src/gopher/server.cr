@@ -10,6 +10,12 @@ module Gopher
     private getter renderer : Renderer
     property resolver : ::Gopher::Resolver
 
+    def initialize(resolver, config)
+      super resolver: resolver,
+        host: config.listen_host,
+        port: config.listen_port
+    end
+
     def initialize(@resolver = NullResolver.new, @host = "localhost", @port = DEFAULT_PORT)
       @server = TCPServer.new(host: @host, port: @port, reuse_port: true)
       @renderer = Renderer.new

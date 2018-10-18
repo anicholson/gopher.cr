@@ -1,18 +1,26 @@
 module Gopher
   class MultiResolver < Resolver
     getter routes
-    private getter host, port, relative_root
+    private getter public_host, public_port, relative_root
 
     @routes : Array(Route)
 
-    def initialize(@host : String, @port : UInt16, @relative_root : String = "")
-      super(default_host: @host, default_port: @port)
+    def initialize(@relative_root, config)
+      @public_host = config.public_host
+      @public_port = config.public_port
+      @routes = [] of Route
+
+      super(default_host: @public_host, default_port: @public_port)
+    end
+
+    def initialize(@public_host : String, @public_port : UInt16, @relative_root : String = "")
+      super(default_host: @public_host, default_port: @public_port)
       @routes = [] of Route
     end
 
     def add_resolver(path : String, resolver : Resolver, description : String = path)
-      resolver.default_host = host
-      resolver.default_port = port
+      resolver.default_host = public_host
+      resolver.default_port = public_port
 
       if resolver.is_a?(DirectoryResolver)
         absolute_root_path = [relative_root, path].join "/"
@@ -37,7 +45,7 @@ module Gopher
         entries = routes.map do |route|
           resolver = route.resolver
 
-          MenuEntry.new(entry_type: resolver.menu_entry_type, description: route.description, selector: route.path, host: host, port: port)
+          MenuEntry.new(entry_type: resolver.menu_entry_type, description: route.description, selector: route.path, host: public_host, port: public_port)
         end
 
         debug "returning a menu"

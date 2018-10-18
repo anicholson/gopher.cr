@@ -1,5 +1,6 @@
 require "./trace"
 require "./gopher/types"
+require "./gopher/config"
 require "./gopher/route"
 require "./gopher/resolver"
 require "./gopher/resolvers/multi_resolver"

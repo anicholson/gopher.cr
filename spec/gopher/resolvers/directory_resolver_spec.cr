@@ -2,9 +2,11 @@ require "../../spec_helper"
 
 module Gopher
   describe DirectoryResolver do
+    let(:config) { Config.new listen_host: "nomatter", listen_port: 70_u16, public_host: "localhost", public_port: 70_u16 }
+
     let(:dr) do
       root_path : String = File.dirname(__FILE__) + "/../../resources/example_directory"
-      DirectoryResolver.new(root_path: root_path, root_selector: "/files")
+      DirectoryResolver.new(root_path: root_path, root_selector: "/files", config: config)
     end
 
     let(:req) { RequestBody.new("/") }

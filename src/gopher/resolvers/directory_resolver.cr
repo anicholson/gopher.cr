@@ -10,7 +10,8 @@ module Gopher
     BINARY_EXTENSIONS = IMAGE_EXTENSIONS + [".zip", ".tar", ".gz", ".bz2", ".doc", ".xls", ".ppt", ".exe", ".wav", ".mp3", ".ogg"]
     TEXT_EXTENSIONS   = [".c", ".C", ".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md", ".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
 
-    def initialize(@root_path : String, @root_selector : String = "", @default_host : String = "localhost", @default_port : UInt16 = 70_u16)
+    def initialize(@root_path : String, @root_selector : String, config)
+      super(config)
     end
 
     def menu_entry_type
@@ -116,8 +117,8 @@ module Gopher
           description = entry_type_and_description.lchop '/'
 
           selector = fields[1] rescue ""
-          host = fields[2] rescue Resolver::DEFAULT_HOST
-          port = fields[3].to_u16 rescue Resolver::DEFAULT_PORT
+          host = fields[2] rescue Resolver::DEFAULT_PUBLIC_HOST
+          port = fields[3].to_u16 rescue Resolver::DEFAULT_PUBLIC_PORT
 
           debug "found entry: #{selector}, #{host}, #{port}"
 
