@@ -1,7 +1,23 @@
-FROM alpine:latest
+FROM durosoft/crystal-alpine:latest as builder
 
-ADD bin/example /usr/bin/
+RUN mkdir -p /opt/gopher
 
-ENTRYPOINT /usr/bin/example
+ARG CRFLAGS
+ARG PUBLIC_PORT
+
+ADD . /opt/gopher
+
+WORKDIR /opt/gopher
+
+RUN shards build $CRFLAGS
+
+FROM scratch
 
 EXPOSE 70
+
+VOLUME "/gopher"
+
+COPY --from=builder /opt/gopher/bin/example /
+
+ENTRYPOINT ["/example"]
+
