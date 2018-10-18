@@ -22,7 +22,7 @@ module Gopher
     end
 
     def listen!
-      puts "listening on port #{port}"
+      puts "Gopher: listening on host #{host}, port #{port}"
       while client = server.accept?
         spawn handle_request(client)
       end
