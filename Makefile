@@ -1,4 +1,4 @@
-PHONY: app-container clean
+PHONY: app-container clean check test
 
 CR_FLAGS="--release --static --no-debug -Dtrace"
 PUBLIC_PORT=9000
@@ -8,3 +8,9 @@ app-container:
 
 clean:
 	rm -rf ./bin/ 
+
+check:
+	crystal build --no-codegen src/**/*.cr
+
+test:
+	crystal spec
