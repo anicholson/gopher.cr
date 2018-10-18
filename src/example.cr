@@ -3,17 +3,17 @@ require "option_parser"
 
 alias G = Gopher
 
-server_port = 70_u16
-host_name = "localhost"
+config = G::Config.new listen_port: 70_u16, listen_host: "0.0.0.0", public_port: 70_u16, public_host: "0.0.0.0"
 
 OptionParser.parse! do |parser|
   parser.banner = "Example gopher.cr server"
 
-  parser.on("-p PORT", "--port=PORT", "Port to run on (default: 70)") { |port| server_port = port.to_u16 }
-  parser.on("-h HOSTNAME", "--hostname=HOSTNAME", "FQ name of the server (default: localhost)") { |hostname| host_name = hostname }
+  parser.on("-p LISTEN_PORT", "--port=LISTEN_PORT", "Port to listen on (default: 70)") { |port| config.listen_port = port.to_u16 }
+  parser.on("-h PUBLIC_HOST", "--public-host=PUBLIC_HOST", "FQ name of the server (default: localhost)") { |hostname| config.public_host = hostname }
+  parser.on("-pp PUBLIC_PORT", "--public-port=PUBLIC_PORT", "Public port to pass to clients. (Useful if server lives behind a gateway)") { |public_port| config.public_port = public_port.to_u16 }
 end
 
-server = G::Server.new port: server_port, host: "0.0.0.0"
+server = G::Server.new config
 
 about = G::SelectorResolver.new("/", G::Resource.new("Hello from gopherland"), G::MenuEntryType::TextFile)
 example_directory = G::DirectoryResolver.new(File.dirname(__FILE__) + "/../spec/resources/example_directory")

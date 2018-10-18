@@ -4,7 +4,11 @@ module Gopher
   describe Server do
     let(port) { 33333_u16 }
 
-    let(server) { Gopher::Server.new(port: port) }
+    let(server) do
+      config = Gopher::Config::DEFAULT.dup
+      config.listen_port = port
+      Gopher::Server.new(config)
+    end
 
     describe "#port" do
       it "listens on the provided port" do
