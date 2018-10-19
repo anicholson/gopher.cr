@@ -1,7 +1,6 @@
-# gopher.cr
+# gopher.cr [![Build Status](https://travis-ci.org/anicholson/gopher.cr.svg?branch=master)](https://travis-ci.org/anicholson/gopher.cr)
 
 An implementation of RFC 1437, the Gopher protocol.
-[![Build Status](https://travis-ci.org/anicholson/gopher.cr.svg?branch=master)](https://travis-ci.org/anicholson/gopher.cr)
 
 This repository is 2 things:
 
