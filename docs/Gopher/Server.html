@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.1">
+<meta name="generator" content="Crystal Docs 0.27.0">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -91,23 +91,8 @@
       
     </li>
   
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/RawRequest" data-name="gopher::rawrequest">
-      <a href="../Gopher/RawRequest.html">RawRequest</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/RawResponse" data-name="gopher::rawresponse">
-      <a href="../Gopher/RawResponse.html">RawResponse</a>
-      
-    </li>
-  
   <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Renderer" data-name="gopher::renderer">
       <a href="../Gopher/Renderer.html">Renderer</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Request" data-name="gopher::request">
-      <a href="../Gopher/Request.html">Request</a>
       
     </li>
   
@@ -123,16 +108,6 @@
   
   <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/ResourceEncoding" data-name="gopher::resourceencoding">
       <a href="../Gopher/ResourceEncoding.html">ResourceEncoding</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Response" data-name="gopher::response">
-      <a href="../Gopher/Response.html">Response</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/ResponseBody" data-name="gopher::responsebody">
-      <a href="../Gopher/ResponseBody.html">ResponseBody</a>
       
     </li>
   
@@ -153,11 +128,6 @@
   
 </ul>
 
-      
-    </li>
-  
-  <li class=" " data-id="github.com/anicholson/gopher.cr/Parser" data-name="parser">
-      <a href="../Parser.html">Parser</a>
       
     </li>
   
@@ -200,6 +170,12 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>This class handles all network-related plumbing.
+It owns the network connections, and passes the request
+& responses around.</p>
+
 
 
 
@@ -216,7 +192,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L5" target="_blank">
+      <a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L8" target="_blank">
         gopher/server.cr
       </a>
     
@@ -224,18 +200,6 @@
   
 
 
-
-  
-    <h2>Constant Summary</h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="DEFAULT_PORT">
-        <strong>DEFAULT_PORT</strong> = <code><span class="n">70_u16</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -264,25 +228,35 @@
       <li class="entry-summary">
         <a href="#host%3AString-instance-method" class="signature"><strong>#host</strong> : String</a>
         
+          <div class="summary"><p>The hostname that clients will connect to.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#listen%21-instance-method" class="signature"><strong>#listen!</strong></a>
+        
+          <div class="summary"><p>Opens a connection & starts listening for requests.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#port%3AUInt16-instance-method" class="signature"><strong>#port</strong> : UInt16</a>
         
+          <div class="summary"><p>The TCP port the server will listen on</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#resolver%3AGopher%3A%3AResolver-instance-method" class="signature"><strong>#resolver</strong> : Gopher::Resolver</a>
         
+          <div class="summary"><p>The resolver that turns a request into content.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#resolver%3D%28resolver%3AGopher%3A%3AResolver%29-instance-method" class="signature"><strong>#resolver=</strong>(resolver : Gopher::Resolver)</a>
+        
+          <div class="summary"><p>The resolver that turns a request into content.</p></div>
         
       </li>
     
@@ -330,7 +304,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -346,7 +320,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -366,10 +340,12 @@
         <a class="method-permalink" href="#host%3AString-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The hostname that clients will connect to.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -382,10 +358,13 @@
         <a class="method-permalink" href="#listen%21-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Opens a connection & starts listening for requests.
+Each request is handled in its own fiber.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -398,10 +377,12 @@
         <a class="method-permalink" href="#port%3AUInt16-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The TCP port the server will listen on</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -414,10 +395,12 @@
         <a class="method-permalink" href="#resolver%3AGopher%3A%3AResolver-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The resolver that turns a request into content.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -430,10 +413,12 @@
         <a class="method-permalink" href="#resolver%3D%28resolver%3AGopher%3A%3AResolver%29-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The resolver that turns a request into content.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/aaec4629bc0372a3ea751c1b6ce65f53f19bba8b/src/gopher/server.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/server.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>

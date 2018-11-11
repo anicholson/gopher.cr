@@ -2,10 +2,17 @@ require "socket"
 require "socket/tcp_server"
 
 module Gopher
+  # This class handles all network-related plumbing.
+  # It owns the network connections, and passes the request
+  # & responses around.
   class Server
-    DEFAULT_PORT = 70_u16
+    # The TCP port the server will listen on
+    getter port : UInt16
 
-    getter port : UInt16, host : String
+    # The hostname that clients will connect to.
+    getter host : String
+
+    # The resolver that turns a request into content.
     property resolver : ::Gopher::Resolver
 
     def initialize(config)
@@ -20,6 +27,8 @@ module Gopher
       @port = config.listen_port
     end
 
+    # Opens a connection & starts listening for requests.
+    # Each request is handled in its own fiber.
     def listen!
       puts "Gopher: listening on host #{host}, port #{port}"
       server = TCPServer.new(host: @host, port: @port, reuse_port: true)

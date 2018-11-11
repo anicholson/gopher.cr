@@ -3,9 +3,10 @@ require "./request_body"
 require "./menu"
 
 require "./resource"
-require "./error"
 
 module Gopher
+  struct Error; end
+  
   alias ResponseBody = Menu | Resource | Error
 
   alias RawRequest = String
