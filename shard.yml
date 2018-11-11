@@ -22,7 +22,7 @@ dependencies:
 development_dependencies:   
   minitest:
     github: ysbaddaden/minitest.cr
-    version: "~> 0.4"
+    version: "~> 0.4.2"
 
 # uncomment this when sentry becomes 0.25-compatible
 #  sentry:
