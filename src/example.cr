@@ -1,6 +1,7 @@
 require "./gopher"
 require "option_parser"
 
+# :nodoc:
 alias G = Gopher
 
 config = G::Config.new listen_port: 70_u16, listen_host: "0.0.0.0", public_port: 70_u16, public_host: "0.0.0.0"

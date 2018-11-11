@@ -7,7 +7,7 @@ module Gopher
 
     describe "#render" do
       describe "rendering an error" do
-        let(:item) { Response.error("This didn't work") }
+        let(item, Response) { Response.error("This didn't work") }
 
         it "contains the error message" do
           renderer.render(client, item)
@@ -21,7 +21,7 @@ module Gopher
       end
 
       describe "rendering a menu" do
-        let(:item) do
+        let(item, Response) do
           Response.ok(Menu.new([
             MenuEntry.new(entry_type: MenuEntryType::Info, selector: "NULL", description: "Hello, menu", host: "nullhost", port: 70_u16),
             MenuEntry.new(entry_type: MenuEntryType::TextFile, selector: "/about.txt", description: "Le text", host: "nullhost", port: 70_u16),

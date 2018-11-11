@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/anicholson/gopher.cr">
+  <title>Gopher::DirectoryResolver - github.com/anicholson/gopher.cr</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/toplevel" data-name="top level namespace">
+      <a href="../toplevel.html">Top Level Namespace</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Error" data-name="error">
+      <a href="../Error.html">Error</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/anicholson/gopher.cr/Gopher" data-name="gopher">
+      <a href="../Gopher.html">Gopher</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Config" data-name="gopher::config">
+      <a href="../Gopher/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/DefaultErrorRenderer" data-name="gopher::defaulterrorrenderer">
+      <a href="../Gopher/DefaultErrorRenderer.html">DefaultErrorRenderer</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/anicholson/gopher.cr/Gopher/DirectoryResolver" data-name="gopher::directoryresolver">
+      <a href="../Gopher/DirectoryResolver.html">DirectoryResolver</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Menu" data-name="gopher::menu">
+      <a href="../Gopher/Menu.html">Menu</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/MenuEntry" data-name="gopher::menuentry">
+      <a href="../Gopher/MenuEntry.html">MenuEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/MenuEntryType" data-name="gopher::menuentrytype">
+      <a href="../Gopher/MenuEntryType.html">MenuEntryType</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/MultiResolver" data-name="gopher::multiresolver">
+      <a href="../Gopher/MultiResolver.html">MultiResolver</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/NullResolver" data-name="gopher::nullresolver">
+      <a href="../Gopher/NullResolver.html">NullResolver</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Renderer" data-name="gopher::renderer">
+      <a href="../Gopher/Renderer.html">Renderer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Resolver" data-name="gopher::resolver">
+      <a href="../Gopher/Resolver.html">Resolver</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Resource" data-name="gopher::resource">
+      <a href="../Gopher/Resource.html">Resource</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/ResourceEncoding" data-name="gopher::resourceencoding">
+      <a href="../Gopher/ResourceEncoding.html">ResourceEncoding</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Route" data-name="gopher::route">
+      <a href="../Gopher/Route.html">Route</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/SelectorResolver" data-name="gopher::selectorresolver">
+      <a href="../Gopher/SelectorResolver.html">SelectorResolver</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Gopher/Server" data-name="gopher::server">
+      <a href="../Gopher/Server.html">Server</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/RequestBody" data-name="requestbody">
+      <a href="../RequestBody.html">RequestBody</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/anicholson/gopher.cr/Trace" data-name="trace">
+      <a href="../Trace.html">Trace</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/anicholson/gopher.cr/Trace/Level" data-name="trace::level">
+      <a href="../Trace/Level.html">Level</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Gopher::DirectoryResolver
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Gopher/DirectoryResolver.html">Gopher::DirectoryResolver</a></li><li class="superclass"><a href="../Gopher/Resolver.html">Gopher::Resolver</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L5" target="_blank">
+        gopher/resolvers/directory_resolver.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="BINARY_EXTENSIONS">
+        <strong>BINARY_EXTENSIONS</strong> = <code><span class="t">IMAGE_EXTENSIONS</span> <span class="o">+</span> [<span class="s">&quot;.zip&quot;</span>, <span class="s">&quot;.tar&quot;</span>, <span class="s">&quot;.gz&quot;</span>, <span class="s">&quot;.bz2&quot;</span>, <span class="s">&quot;.doc&quot;</span>, <span class="s">&quot;.xls&quot;</span>, <span class="s">&quot;.ppt&quot;</span>, <span class="s">&quot;.exe&quot;</span>, <span class="s">&quot;.wav&quot;</span>, <span class="s">&quot;.mp3&quot;</span>, <span class="s">&quot;.ogg&quot;</span>]</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="HOST_MARKER">
+        <strong>HOST_MARKER</strong> = <code><span class="s">&quot;%HOST%&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="IMAGE_EXTENSIONS">
+        <strong>IMAGE_EXTENSIONS</strong> = <code>[<span class="s">&quot;.jpg&quot;</span>, <span class="s">&quot;.gif&quot;</span>, <span class="s">&quot;.bmp&quot;</span>, <span class="s">&quot;.png&quot;</span>, <span class="s">&quot;.jpeg&quot;</span>, <span class="s">&quot;.tif&quot;</span>, <span class="s">&quot;.tiff&quot;</span>, <span class="s">&quot;.tga&quot;</span>, <span class="s">&quot;.ico&quot;</span>]</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="MENUFILE">
+        <strong>MENUFILE</strong> = <code><span class="s">&quot;.gophermap&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="PORT_MARKER">
+        <strong>PORT_MARKER</strong> = <code><span class="s">&quot;%PORT%&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="TEXT_EXTENSIONS">
+        <strong>TEXT_EXTENSIONS</strong> = <code>[<span class="s">&quot;.c&quot;</span>, <span class="s">&quot;.C&quot;</span>, <span class="s">&quot;.cpp&quot;</span>, <span class="s">&quot;.cs&quot;</span>, <span class="s">&quot;.cr&quot;</span>, <span class="s">&quot;.d&quot;</span>, <span class="s">&quot;.el&quot;</span>, <span class="s">&quot;.fs&quot;</span>, <span class="s">&quot;.html&quot;</span>, <span class="s">&quot;.xml&quot;</span>, <span class="s">&quot;.json&quot;</span>, <span class="s">&quot;.txt&quot;</span>, <span class="s">&quot;.md&quot;</span>, <span class="s">&quot;.markdown&quot;</span>, <span class="s">&quot;.rb&quot;</span>, <span class="s">&quot;.py&quot;</span>, <span class="s">&quot;.sh&quot;</span>, <span class="s">&quot;.js&quot;</span>, <span class="s">&quot;.rtf&quot;</span>]</code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28root_path%3AString%2Croot_selector%3AString%2Cconfig%29-class-method" class="signature"><strong>.new</strong>(root_path : String, root_selector : String, config)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#default_host%3AString-instance-method" class="signature"><strong>#default_host</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_host%3D%28default_host%29-instance-method" class="signature"><strong>#default_host=</strong>(default_host)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_port%3AUInt16-instance-method" class="signature"><strong>#default_port</strong> : UInt16</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_port%3D%28default_port%29-instance-method" class="signature"><strong>#default_port=</strong>(default_port)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#menu_entry_type-instance-method" class="signature"><strong>#menu_entry_type</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#resolve%28request%3ARequestBody%29%3AResponse-instance-method" class="signature"><strong>#resolve</strong>(request : RequestBody) : Response</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root_selector%3AString-instance-method" class="signature"><strong>#root_selector</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root_selector%3D%28root_selector%29-instance-method" class="signature"><strong>#root_selector=</strong>(root_selector)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../Gopher/Resolver.html">Gopher::Resolver</a></code></h3>
+  
+  
+    <a href="../Gopher/Resolver.html#default_host%3AString-instance-method" class="tooltip">
+      <span>default_host : String</span>
+    default_host</a>, 
+    
+  
+    <a href="../Gopher/Resolver.html#default_host%3D%28default_host%3AString%29-instance-method" class="tooltip">
+      <span>default_host=(default_host : String)</span>
+    default_host=</a>, 
+    
+  
+    <a href="../Gopher/Resolver.html#default_port%3AUInt16-instance-method" class="tooltip">
+      <span>default_port : UInt16</span>
+    default_port</a>, 
+    
+  
+    <a href="../Gopher/Resolver.html#default_port%3D%28default_port%3AUInt16%29-instance-method" class="tooltip">
+      <span>default_port=(default_port : UInt16)</span>
+    default_port=</a>, 
+    
+  
+    <a href="../Gopher/Resolver.html#menu_entry_type%3AMenuEntryType-instance-method" class="tooltip">
+      <span>menu_entry_type : MenuEntryType</span>
+    menu_entry_type</a>, 
+    
+  
+    <a href="../Gopher/Resolver.html#resolve%28req%3ARequestBody%29%3AResponse-instance-method" class="tooltip">
+      <span>resolve(req : RequestBody) : Response</span>
+    resolve</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../Gopher/Resolver.html">Gopher::Resolver</a></code></h3>
+  
+  
+    <a href="../Gopher/Resolver.html#new%28default_host%2Cdefault_port%29-class-method" class="tooltip">
+      <span>new(default_host, default_port)<br/>new(config)<br/>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(root_path:String,root_selector:String,config)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(root_path : String, root_selector : String, config)
+
+        <a class="method-permalink" href="#new%28root_path%3AString%2Croot_selector%3AString%2Cconfig%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="default_host:String-instance-method">
+      <div class="signature">
+        
+        def <strong>default_host</strong> : String
+
+        <a class="method-permalink" href="#default_host%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_host=(default_host)-instance-method">
+      <div class="signature">
+        
+        def <strong>default_host=</strong>(default_host)
+
+        <a class="method-permalink" href="#default_host%3D%28default_host%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_port:UInt16-instance-method">
+      <div class="signature">
+        
+        def <strong>default_port</strong> : UInt16
+
+        <a class="method-permalink" href="#default_port%3AUInt16-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_port=(default_port)-instance-method">
+      <div class="signature">
+        
+        def <strong>default_port=</strong>(default_port)
+
+        <a class="method-permalink" href="#default_port%3D%28default_port%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="menu_entry_type-instance-method">
+      <div class="signature">
+        
+        def <strong>menu_entry_type</strong>
+
+        <a class="method-permalink" href="#menu_entry_type-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="resolve(request:RequestBody):Response-instance-method">
+      <div class="signature">
+        
+        def <strong>resolve</strong>(request : <a href="../RequestBody.html">RequestBody</a>) : Response
+
+        <a class="method-permalink" href="#resolve%28request%3ARequestBody%29%3AResponse-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root_selector:String-instance-method">
+      <div class="signature">
+        
+        def <strong>root_selector</strong> : String
+
+        <a class="method-permalink" href="#root_selector%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root_selector=(root_selector)-instance-method">
+      <div class="signature">
+        
+        def <strong>root_selector=</strong>(root_selector)
+
+        <a class="method-permalink" href="#root_selector%3D%28root_selector%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/anicholson/gopher.cr/blob/f3e26f7e3b1ccd0b65e946aed56f4a140b4475a3/src/gopher/resolvers/directory_resolver.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
