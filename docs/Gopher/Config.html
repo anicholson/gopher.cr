@@ -196,6 +196,29 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>All the network-related config required for the Gopher server to behave properly
+when behind NAT, Network Gateways & Docker containers.</p>
+
+<p>While Gopher's assigned port is 70, it mightn't always be possible to bind to that exact port
+(for example, if the running user doesn't have elevated privileges).
+Alternatively, the server may not be running on a host with the same fully-qualified domain/hostname
+as its publicly-facing address.</p>
+
+<p>To cope with this flexibility, we accept different values from the internal & external perspectives
+to the server.</p>
+
+<h2>Example</h2>
+
+<p>Running on a server where port 70 is not available, using port forwarding to route public requests to the app.</p>
+
+<pre><code><span class="t">Config</span>.<span class="k">new</span>
+  listen_port: <span class="n">7070_u16</span>,
+  listen_host: <span class="s">&quot;localhost&quot;</span>,
+  public_host: <span class="s">&quot;gopher.example.org&quot;</span>,
+  public_port: <span class="n">70_u16</span></code></pre>
+
 
 
 
@@ -212,7 +235,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L2" target="_blank">
+      <a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L23" target="_blank">
         gopher/config.cr
       </a>
     
@@ -229,6 +252,10 @@
       <dt class="entry-const" id="DEFAULT">
         <strong>DEFAULT</strong> = <code><span class="k">new</span>(listen_port: <span class="n">70_u16</span>, public_port: <span class="n">70_u16</span>, listen_host: <span class="s">&quot;localhost&quot;</span>, public_host: <span class="s">&quot;localhost&quot;</span>)</code>
       </dt>
+      
+      <dd class="entry-const-doc">
+        <p>A sane set of default config values.</p>
+      </dd>
       
     
   </dl>
@@ -346,7 +373,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -369,7 +396,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -385,7 +412,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -401,7 +428,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -417,7 +444,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -433,7 +460,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -449,7 +476,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -465,7 +492,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -481,7 +508,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/anicholson/gopher.cr/blob/17dee595b7dba78e7512cee1198ff3dc65577aef/src/gopher/config.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/anicholson/gopher.cr/blob/6ca38612d4ae74461093912cfac4be017d80ce27/src/gopher/config.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
