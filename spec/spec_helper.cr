@@ -12,4 +12,3 @@ module Minitest
 end
 
 require "../src/gopher"
-

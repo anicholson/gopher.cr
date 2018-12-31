@@ -6,7 +6,7 @@ require "./resource"
 
 module Gopher
   struct Error; end
-  
+
   alias ResponseBody = Menu | Resource | Error
 
   alias RawRequest = String
