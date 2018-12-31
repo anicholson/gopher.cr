@@ -90,5 +90,19 @@ module Gopher
         expect(result.value.class).must_equal(Menu)
       end
     end
+
+    describe "Requesting a menu item from a submenu" do
+      it "retrieves the resource" do
+        expected_content = File.read(File.dirname(__FILE__) + "/../../resources/example_directory/looks_like_a_file_but_is_a.directory/lol.txt")
+        req = RequestBody.new("/files/looks_like_a_file_but_is_a.directory/lol.txt")
+
+        result = dr.resolve(req)
+
+        expect(result.value.class).must_equal(Resource)
+
+        resource = result.value.as Resource
+        expect(resource.content.gets_to_end).must_equal(expected_content)
+      end
+    end
   end
 end
