@@ -110,7 +110,7 @@ module Gopher
     end
 
     private def relative_selector(fq_selector)
-      fq_selector.sub(root_selector, ".")
+      fq_selector.sub(root_selector, ".").rchop('/')
     end
 
     private def io_resource(file_path)

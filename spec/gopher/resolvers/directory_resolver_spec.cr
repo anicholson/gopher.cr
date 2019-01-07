@@ -82,6 +82,16 @@ module Gopher
         expect(info_messages).must_equal(1)
       end
 
+      it "handles trailing slashes correctly" do
+        req = RequestBody.new("/1files/1games/")
+
+        result = dr.resolve(req)
+
+        menu = result.value
+
+        expect(menu.class).must_equal(Menu)
+      end
+
       it "can determine the submenu based on filetype" do
         req = RequestBody.new("/1files/1looks_like_a_file_but_is_a.directory")
 
