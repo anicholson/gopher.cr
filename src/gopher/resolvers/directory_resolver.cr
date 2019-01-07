@@ -31,30 +31,57 @@ module Gopher
       end
     end
 
-    private def resolve_selector(sel)
+    private def resolve_selector(sel, paths = [] of String)
       relative_sel = relative_selector(sel)
 
       debug "Resolving: #{relative_sel}"
 
-      if is_submenu?(relative_sel)
-        Dir.cd(root_path) do
-          Dir.cd(relative_sel) do
-            raw = File.read(MENUFILE)
-            return Response.ok(menu_from_file(relative_sel, raw))
+      leaf_node = relative_sel.count('/') == 0
+
+      if leaf_node
+        relative_sel = relative_sel.lchop
+
+        subpath = if paths.any?
+                    paths.join('/')
+                  else
+                    "."
+                  end
+
+        if is_submenu?(relative_sel, subpath)
+          Dir.cd(root_path) do
+            Dir.cd(subpath) do
+              Dir.cd(relative_sel) do
+                raw = File.read(MENUFILE)
+                return Response.ok(menu_from_file(relative_sel, raw))
+              end
+            end
           end
         end
-      end
 
-      if is_file?(relative_sel)
-        Dir.cd(root_path) do
-          io = io_resource(relative_sel)
-          encoding = guess_encoding(relative_sel)
+        file_to_send = find_file(relative_sel, subpath)
+        if file_to_send
+          io = io_resource(file_to_send)
+          encoding = guess_encoding(file_to_send)
 
           Response.ok(Resource.new(io, encoding))
+        else
+          debug "Unable to resolve selector: #{relative_sel}"
+          Response.error("Unable to resolve selector: #{relative_sel}")
         end
       else
-        debug "Unable to resolve selector: #{relative_sel}"
-        Response.error("Unable to resolve selector: #{relative_sel}")
+        tree = relative_sel.split('/', 2)
+
+        next_node = tree.first.lchop
+
+        debug "Next node: #{next_node}"
+
+        if File.directory?([root_path, next_node].join('/'))
+          debug "Going to descend"
+          resolve_selector(tree[1].lchop('/'), paths << next_node)
+        else
+          debug "#{next_node} is not a dir"
+          raise "BOOM"
+        end
       end
     end
 
@@ -133,16 +160,24 @@ module Gopher
       end.compact
     end
 
-    private def is_file?(selector)
-      debug "Checking if #{selector} is a file in #{root_path}"
-      debug "File.expand_path: #{File.expand_path(File.join(root_selector, selector), root_path)}"
-      #      Dir.cd(root_path) do
-      return File.exists?(File.expand_path(selector, root_path))
-      #      end
+    private def find_file(selector, subpath = "")
+      fully_qualified_search_path = File.expand_path(File.join(root_path, subpath, selector), root_path)
+      debug "Checking if #{selector} is a file in #{root_path}/#{subpath}"
+      debug "File.expand_path: #{fully_qualified_search_path}"
+
+      if File.exists?(fully_qualified_search_path)
+        fully_qualified_search_path
+      else
+        nil
+      end
     end
 
-    private def is_submenu?(selector)
-      Dir.cd(root_path) do
+    private def is_submenu?(selector, subpath)
+      search_path = File.expand_path(File.join(root_path, subpath), root_path)
+
+      debug "Checking if #{selector} is a directory in #{search_path}"
+
+      Dir.cd(search_path) do
         return File.directory?(selector)
       end
     end

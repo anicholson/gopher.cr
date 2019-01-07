@@ -1,5 +1,5 @@
 iHello, welcome to the subdirectory!
 i
-0Hipster Ipsum	ipsum.txt	%HOST%	%PORT%
-1Games	/games	%HOST%	%PORT%
-1Other Directory	/looks_like_a_file_but_is_a.directory	%HOST%	%PORT%
+0Hipster Ipsum	0ipsum.txt	%HOST%	%PORT%
+1Games	/1games	%HOST%	%PORT%
+1Other Directory	/1looks_like_a_file_but_is_a.directory	%HOST%	%PORT%

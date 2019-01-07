@@ -6,7 +6,7 @@ module Gopher
 
     let(:dr) do
       root_path : String = File.dirname(__FILE__) + "/../../resources/example_directory"
-      DirectoryResolver.new(root_path: root_path, root_selector: "/files", config: config)
+      DirectoryResolver.new(root_path: root_path, root_selector: "/1files", config: config)
     end
 
     let(:req) { RequestBody.new("/") }
@@ -36,7 +36,7 @@ module Gopher
 
         ipsum = menu.entries.count do |entry|
           entry.entry_type == MenuEntryType::TextFile &&
-            entry.selector == "/files/ipsum.txt"
+            entry.selector == "/1files/0ipsum.txt"
         end
 
         expect(ipsum).must_equal(1)
@@ -48,7 +48,7 @@ module Gopher
 
         submenu = menu.entries.count do |entry|
           entry.entry_type == MenuEntryType::Submenu &&
-            entry.selector == "/files/games"
+            entry.selector == "/1files/1games"
         end
 
         expect(submenu).must_equal(1)
@@ -57,7 +57,7 @@ module Gopher
 
     describe "Requesting a file selector" do
       it "works" do
-        req = RequestBody.new("/files/ipsum.txt")
+        req = RequestBody.new("/1files/0ipsum.txt")
 
         result = dr.resolve(req)
         resource = result.value.as Resource
@@ -69,7 +69,7 @@ module Gopher
 
     describe "Requesting a submenu selector" do
       it "reads the .gopermap from the relative path" do
-        req = RequestBody.new("/files/games")
+        req = RequestBody.new("/1files/1games")
 
         result = dr.resolve(req)
 
@@ -83,7 +83,7 @@ module Gopher
       end
 
       it "can determine the submenu based on filetype" do
-        req = RequestBody.new("/files/looks_like_a_file_but_is_a.directory")
+        req = RequestBody.new("/1files/1looks_like_a_file_but_is_a.directory")
 
         result = dr.resolve(req)
 
@@ -94,7 +94,7 @@ module Gopher
     describe "Requesting a menu item from a submenu" do
       it "retrieves the resource" do
         expected_content = File.read(File.dirname(__FILE__) + "/../../resources/example_directory/looks_like_a_file_but_is_a.directory/lol.txt")
-        req = RequestBody.new("/files/looks_like_a_file_but_is_a.directory/lol.txt")
+        req = RequestBody.new("/1files/1looks_like_a_file_but_is_a.directory/0lol.txt")
 
         result = dr.resolve(req)
 
