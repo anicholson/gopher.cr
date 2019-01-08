@@ -20,7 +20,7 @@ This makes the protocol both simpler and less featureful.
 A request to a gopher:// server consists of a single line, containing a URI (called a selector):
 
 ```
-/stuff/and/nonsense/intro.txt\r\n
+/1stuff/1and/1nonsense/0intro.txt\r\n
 ```
 
 the server then resolves that request into a response, and renders it back to the client.
@@ -34,10 +34,31 @@ A Response can be one of 3 things:
 * a resource (a file, or a another server)
 * an error
 
-A copy of the RFC that describes the protocol is [included in this repo][rfc].
+A copy of the RFC that describes the protocol is [included in this repo][rfc]
 
-[rfc]: ./rfc-1436.txt
+
 
 ## Using this library
 
-TODO
+To use this library, you need to:
+
+1. Create a `Server` object
+2. Provide it with `Resolver`(s) that instruct it how to find content
+3. Tell the server to listen for requests!
+
+A good example for how this can be done exists in `src/example.cr`
+
+If you're looking for a more turnkey solution, check out its sister project
+[Port70][port70].
+
+
+
+# Development
+
+Testing on the application is built using the excellent [minitest.cr][minitest].
+
+Run tests with `crystal spec`. 
+
+[port70]: https://github.com/anicholson/port70
+[rfc]: ./rfc-1436.txt
+[minitest]: https://github.com/ysbaddaden/minitest.cr
