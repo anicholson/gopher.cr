@@ -6,7 +6,7 @@ module Trace
     Error
   end
 
-  @@default_level : Level = :debug
+  @@default_level : Level = :error
 
   def self.default_level=(level : Level)
     @@default_level = level
