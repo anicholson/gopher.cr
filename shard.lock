@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  crytic:
+    github: hanneskaeufler/crytic
+    version: 3.1.1
+
   minitest:
     github: ysbaddaden/minitest.cr
     version: 0.4.2
