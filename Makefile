@@ -16,7 +16,7 @@ deps:
 	shards install
 
 test: deps
-	crystal spec
+	crystal spec -- -p 3
 
 crytic: deps
 	bin/crytic --preamble ""
