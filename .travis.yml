@@ -4,3 +4,4 @@ install:
 
 script:
   - crystal spec
+  - bin/crytic --preamble ""
