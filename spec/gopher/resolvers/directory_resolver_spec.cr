@@ -5,7 +5,7 @@ module Gopher
     let(:config) { Config.new listen_host: "nomatter", listen_port: 70_u16, public_host: "localhost", public_port: 70_u16 }
 
     let(:dr) do
-      root_path : String = File.dirname(__FILE__) + "/../../resources/example_directory"
+      root_path : String = File.expand_path("./spec/resources/example_directory")
       DirectoryResolver.new(root_path: root_path, root_selector: "/1files", config: config)
     end
 
@@ -61,7 +61,7 @@ module Gopher
 
         result = dr.resolve(req)
         resource = result.value.as Resource
-        expected_content = File.read(File.dirname(__FILE__) + "/../../resources/example_directory/ipsum.txt")
+        expected_content = File.read(File.expand_path("./spec/resources/example_directory/ipsum.txt"))
 
         expect(resource.content.gets_to_end).must_equal(expected_content)
       end
@@ -103,7 +103,7 @@ module Gopher
 
     describe "Requesting a menu item from a submenu" do
       it "retrieves the resource" do
-        expected_content = File.read(File.dirname(__FILE__) + "/../../resources/example_directory/looks_like_a_file_but_is_a.directory/lol.txt")
+        expected_content = File.read(File.expand_path("./spec/resources/example_directory/looks_like_a_file_but_is_a.directory/lol.txt"))
         req = RequestBody.new("/1files/1looks_like_a_file_but_is_a.directory/0lol.txt")
 
         result = dr.resolve(req)
