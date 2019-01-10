@@ -8,7 +8,7 @@ module Gopher
     PORT_MARKER       = "%PORT%"
     IMAGE_EXTENSIONS  = [".jpg", ".gif", ".bmp", ".png", ".jpeg", ".tif", ".tiff", ".tga", ".ico"]
     BINARY_EXTENSIONS = IMAGE_EXTENSIONS + [".zip", ".tar", ".gz", ".bz2", ".doc", ".xls", ".ppt", ".exe", ".wav", ".mp3", ".ogg"]
-    TEXT_EXTENSIONS   = [".c", ".C", ".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md", ".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
+    TEXT_EXTENSIONS   = [".c", ".cpp", ".cs", ".cr", ".d", ".el", ".fs", ".html", ".xml", ".json", ".txt", ".md", ".markdown", ".rb", ".py", ".sh", ".js", ".rtf"]
 
     def initialize(@root_path : String, @root_selector : String, config)
       super(config)
