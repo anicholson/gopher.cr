@@ -1,4 +1,4 @@
-PHONY: app-container clean check test
+PHONY: app-container clean check test deps crytic
 
 CR_FLAGS="--release --static --no-debug -Dtrace"
 PUBLIC_PORT=9000
@@ -12,5 +12,11 @@ clean:
 check:
 	crystal build --no-codegen src/**/*.cr
 
-test:
-	crystal spec
+deps:
+	shards install
+
+test: deps
+	crystal spec -- -p 3
+
+crytic: deps
+	bin/crytic --preamble ""

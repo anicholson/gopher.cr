@@ -30,16 +30,18 @@ module Gopher
         expect(menu.entries.size > 0).must_equal(true)
       end
 
-      it "lists .txt files as text entries" do
-        result = dr.resolve(req)
-        menu = result.value.as Menu
+      it "lists text files as text entries" do
+        DirectoryResolver::TEXT_EXTENSIONS.each do |ext|
+          result = dr.resolve(req)
+          menu = result.value.as Menu
 
-        ipsum = menu.entries.count do |entry|
-          entry.entry_type == MenuEntryType::TextFile &&
-            entry.selector == "/1files/0ipsum.txt"
+          ipsum = menu.entries.count do |entry|
+            entry.entry_type == MenuEntryType::TextFile &&
+              entry.selector == "/1files/0test#{ext}"
+          end
+
+          expect(ipsum).must_equal(1)
         end
-
-        expect(ipsum).must_equal(1)
       end
 
       it "includes submenus" do

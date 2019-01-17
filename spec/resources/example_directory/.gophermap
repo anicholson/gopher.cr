@@ -3,3 +3,23 @@ i
 0Hipster Ipsum	0ipsum.txt	%HOST%	%PORT%
 1Games	/1games	%HOST%	%PORT%
 1Other Directory	/1looks_like_a_file_but_is_a.directory	%HOST%	%PORT%
+i Test text files:
+0c	0test.c	%HOST%	%PORT%
+0C	0test.C	%HOST%	%PORT%
+0cpp	0test.cpp	%HOST%	%PORT%
+0cs	0test.cs	%HOST%	%PORT%
+0cr	0test.cr	%HOST%	%PORT%
+0d	0test.d	%HOST%	%PORT%
+0el	0test.el	%HOST%	%PORT%
+0fs	0test.fs	%HOST%	%PORT%
+0html	0test.html	%HOST%	%PORT%
+0xml	0test.xml	%HOST%	%PORT%
+0json	0test.json	%HOST%	%PORT%
+0txt	0test.txt	%HOST%	%PORT%
+0md	0test.md	%HOST%	%PORT%
+0markdown	0test.markdown	%HOST%	%PORT%
+0rb	0test.rb	%HOST%	%PORT%
+0py	0test.py	%HOST%	%PORT%
+0sh	0test.sh	%HOST%	%PORT%
+0rtf	0test.rtf	%HOST%  %PORT%
+0js	0test.js	%HOST%  %PORT%
